@@ -1,0 +1,61 @@
+# MeeryahyaToolkit - Python Dependencies
+# For authorized security testing only
+
+# Core dependencies
+requests>=2.31.0
+cryptography>=41.0.0
+pycryptodome>=3.19.0
+paramiko>=3.3.0
+pyOpenSSL>=23.2.0
+
+# Network & C2
+flask>=3.0.0
+websockets>=12.0
+dnspython>=2.4.0
+scapy>=2.5.0
+impacket>=0.11.0
+
+# Cloud APIs
+boto3>=1.28.0  # AWS
+azure-identity>=1.14.0  # Azure
+google-cloud-storage>=2.10.0  # GCP
+
+# Exploitation & Security
+pypykatz>=0.6.0  # LSASS credential extraction
+pwntools>=4.11.0  # Exploit development
+capstone>=5.0.0  # Disassembly
+
+# AI/ML (for AI-driven C2)
+openai>=1.0.0  # GPT-4 integration
+transformers>=4.35.0  # HuggingFace models
+torch>=2.1.0  # PyTorch for ONNX models
+onnxruntime>=1.16.0  # ONNX model inference
+
+# System interaction
+psutil>=5.9.0
+pywin32>=306; sys_platform == 'win32'  # Windows APIs
+pynput>=1.7.6  # Keylogging
+pyaudio>=0.2.14  # Audio capture
+opencv-python>=4.8.0  # Camera capture
+pillow>=10.1.0  # Image processing
+pyscreenshot>=3.1  # Screenshots
+
+# Database & Logging
+sqlalchemy>=2.0.0
+aiosqlite>=0.19.0
+
+# Utilities
+pyyaml>=6.0.1
+python-dotenv>=1.0.0
+colorama>=0.4.6
+tqdm>=4.66.0
+argcomplete>=3.1.0
+pydantic>=2.4.0
+
+# Optional but recommended
+python-nmap>=0.7.1  # Network scanning
+serial>=0.0.97  # Serial communication (satcom)
+
+# Development/Testing
+pytest>=7.4.0
+black>=23.10.0

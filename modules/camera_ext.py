@@ -133,6 +133,7 @@ def start_camera_capture(interval: int = DEFAULT_INTERVAL, require_motion: bool 
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser(description="Camera Ext (Enhanced)")
     parser.add_argument("--interval", type=int, default=DEFAULT_INTERVAL, help="Interval between snapshots (seconds)")
     parser.add_argument("--motion", action="store_true", help="Only snapshot on motion detection")
@@ -146,7 +147,6 @@ if __name__ == "__main__":
         exit(1)
 
     # Fix: declare global before assignment and remove duplicate assignment
-    global DEFAULT_FORMAT
     DEFAULT_FORMAT = args.format
 
     def available_cameras(max_test=10):
