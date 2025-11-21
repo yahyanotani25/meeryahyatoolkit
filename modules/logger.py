@@ -278,6 +278,7 @@ _db_conn = _init_db()
 # Enhanced log_event function with performance tracking
 def log_event(category: str, message: bytes, level: str = "INFO"):
     """Encrypt `message` with AES-GCM and insert into SQLite."""
+    global _db_conn
     start_time = time.time()
     try:
         aesgcm = AESGCM(AES_KEY)
@@ -295,6 +296,7 @@ def log_event(category: str, message: bytes, level: str = "INFO"):
 # Enhanced _rotate_and_encrypt_backups with error handling
 def _rotate_and_encrypt_backups():
     """Compress old DB files and encrypt with ChaCha20-Poly1305."""
+    global _db_conn
     while True:
         time.sleep(86400)  # once a day
         try:
@@ -315,7 +317,6 @@ def _rotate_and_encrypt_backups():
             os.remove(backup_name)
             # Reinit DB
             with _db_lock:
-                global _db_conn
                 _db_conn = _init_db()
             logger.info("[LOGGER] Backup and encryption completed successfully.")
         except Exception as e:

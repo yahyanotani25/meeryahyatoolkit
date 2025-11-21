@@ -304,7 +304,7 @@ def setup_logging(config: dict, key: bytes):
     root.handlers.clear()
     for h in handlers:
         root.addHandler(h)
-    root.setLevel(getattr(logging, config.get("level", "INFO").upper())
+    root.setLevel(getattr(logging, config.get("level", "INFO").upper()))
 
 # ──────────────────────────────────────────────────────────────────────────────
 #                           EVASION TECHNIQUES (ENHANCED)
@@ -1833,7 +1833,7 @@ class AndroidPayloadBuilder:
                     # ... (payload execution code) ...
                     
                     :try_end_0
-                    .catch Ljava/lang/Exception; {{:try_start_0 .. :try_end_0} :catch_0}}
+                    .catch Ljava/lang/Exception; {{:try_start_0 .. :try_end_0}} :catch_0}}
                     
                     return-void
                 .end method

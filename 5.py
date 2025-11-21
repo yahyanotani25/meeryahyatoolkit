@@ -336,7 +336,7 @@ def setup_logging(config: dict, key: bytes):
     root.handlers.clear()
     for h in handlers:
         root.addHandler(h)
-    root.setLevel(getattr(logging, config.get("level", "INFO").upper())
+    root.setLevel(getattr(logging, config.get("level", "INFO").upper()))
 
 # ──────────────────────────────────────────────────────────────────────────────
 #                           EVASION TECHNIQUES (EXTREME)
